@@ -32,4 +32,6 @@ generated from `SPEC.md`.
 ## Layout
 
 The folder previously named `.codex/` is now `.agents/` (tool-agnostic).
-Skills live under `.agents/skills/<name>/SKILL.md`.
+The only skill kept is `.agents/skills/twenty-crm/`; the other Symphony-era
+skills were pruned because their assumptions (Elixir runtime, Codex review
+workflow, Symphony's `linear_graphql` tool) do not hold in this repo.

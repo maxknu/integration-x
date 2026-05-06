@@ -18,5 +18,4 @@
 
 #### Test Plan
 
-- [ ] `make -C elixir all`
-- [ ] <!-- Additional targeted checks (list below) -->
+- [ ] <!-- How was this verified? List commands or manual checks. -->
