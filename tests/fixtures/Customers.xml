@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap11env:Envelope xmlns:soap11env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://soap-crm.local/services" xmlns:s0="http://soap-crm.local/types">
+    <soap11env:Body>
+        <tns:ListCompaniesResponse>
+            <tns:ListCompaniesResult>
+                <s0:Company>
+                    <s0:Id>1</s0:Id>
+                    <s0:Name>Northwind Traders</s0:Name>
+                    <s0:OrgNumber>556001-0001</s0:OrgNumber>
+                    <s0:Industry>Wholesale</s0:Industry>
+                    <s0:Website>https://northwind.example</s0:Website>
+                    <s0:Phone>+46 8 123 4501</s0:Phone>
+                    <s0:Email>info@northwind.example</s0:Email>
+                    <s0:Address>Storgatan 1</s0:Address>
+                    <s0:City>Stockholm</s0:City>
+                    <s0:Country>Sweden</s0:Country>
+                </s0:Company>
+                <s0:Company>
+                    <s0:Id>2</s0:Id>
+                    <s0:Name>Contoso Industries</s0:Name>
+                    <s0:OrgNumber>556002-0002</s0:OrgNumber>
+                    <s0:Industry>Manufacturing</s0:Industry>
+                    <s0:Website>https://contoso.example</s0:Website>
+                    <s0:Phone>+46 8 123 4502</s0:Phone>
+                    <s0:Email>hello@contoso.example</s0:Email>
+                    <s0:Address>Industrivagen 14</s0:Address>
+                    <s0:City>Goteborg</s0:City>
+                    <s0:Country>Sweden</s0:Country>
+                </s0:Company>
+                <s0:Company>
+                    <s0:Id>3</s0:Id>
+                    <s0:Name>Fabrikam Logistics</s0:Name>
+                    <s0:OrgNumber>556003-0003</s0:OrgNumber>
+                    <s0:Industry>Logistics</s0:Industry>
+                    <s0:Website>https://fabrikam.example</s0:Website>
+                    <s0:Phone>+47 22 12 3403</s0:Phone>
+                    <s0:Email>post@fabrikam.example</s0:Email>
+                    <s0:Address>Havnegata 7</s0:Address>
+                    <s0:City>Oslo</s0:City>
+                    <s0:Country>Norway</s0:Country>
+                </s0:Company>
+                <s0:Company>
+                    <s0:Id>4</s0:Id>
+                    <s0:Name>Adventure Works</s0:Name>
+                    <s0:OrgNumber>556004-0004</s0:OrgNumber>
+                    <s0:Industry>Retail</s0:Industry>
+                    <s0:Website>https://adventureworks.example</s0:Website>
+                    <s0:Phone>+45 33 12 3404</s0:Phone>
+                    <s0:Email>kontakt@adventureworks.example</s0:Email>
+                    <s0:Address>Strandvejen 22</s0:Address>
+                    <s0:City>Copenhagen</s0:City>
+                    <s0:Country>Denmark</s0:Country>
+                </s0:Company>
+                <s0:Company>
+                    <s0:Id>5</s0:Id>
+                    <s0:Name>Wingtip Toys</s0:Name>
+                    <s0:OrgNumber>556005-0005</s0:OrgNumber>
+                    <s0:Industry>Consumer Goods</s0:Industry>
+                    <s0:Website>https://wingtip.example</s0:Website>
+                    <s0:Phone>+358 9 123 4505</s0:Phone>
+                    <s0:Email>info@wingtip.example</s0:Email>
+                    <s0:Address>Mannerheimintie 9</s0:Address>
+                    <s0:City>Helsinki</s0:City>
+                    <s0:Country>Finland</s0:Country>
+                </s0:Company>
+                <s0:Company>
+                    <s0:Id>6</s0:Id>
+                    <s0:Name>Litware Software</s0:Name>
+                    <s0:OrgNumber>556006-0006</s0:OrgNumber>
+                    <s0:Industry>Software</s0:Industry>
+                    <s0:Website>https://litware.example</s0:Website>
+                    <s0:Phone>+46 31 12 3406</s0:Phone>
+                    <s0:Email>sales@litware.example</s0:Email>
+                    <s0:Address>Avenyn 88</s0:Address>
+                    <s0:City>Goteborg</s0:City>
+                    <s0:Country>Sweden</s0:Country>
+                </s0:Company>
+                <s0:Company>
+                    <s0:Id>7</s0:Id>
+                    <s0:Name>Tailspin Travel</s0:Name>
+                    <s0:OrgNumber>556007-0007</s0:OrgNumber>
+                    <s0:Industry>Travel</s0:Industry>
+                    <s0:Website>https://tailspin.example</s0:Website>
+                    <s0:Phone>+44 20 7123 4507</s0:Phone>
+                    <s0:Email>bookings@tailspin.example</s0:Email>
+                    <s0:Address>Baker Street 221B</s0:Address>
+                    <s0:City>London</s0:City>
+                    <s0:Country>United Kingdom</s0:Country>
+                </s0:Company>
+                <s0:Company>
+                    <s0:Id>8</s0:Id>
+                    <s0:Name>Proseware Health</s0:Name>
+                    <s0:OrgNumber>556008-0008</s0:OrgNumber>
+                    <s0:Industry>Healthcare</s0:Industry>
+                    <s0:Website>https://proseware.example</s0:Website>
+                    <s0:Phone>+49 30 1234 4508</s0:Phone>
+                    <s0:Email>info@proseware.example</s0:Email>
+                    <s0:Address>Unter den Linden 5</s0:Address>
+                    <s0:City>Berlin</s0:City>
+                    <s0:Country>Germany</s0:Country>
+                </s0:Company>
+                <s0:Company>
+                    <s0:Id>9</s0:Id>
+                    <s0:Name>Margie's Travel</s0:Name>
+                    <s0:OrgNumber>556009-0009</s0:OrgNumber>
+                    <s0:Industry>Travel</s0:Industry>
+                    <s0:Website>https://margies.example</s0:Website>
+                    <s0:Phone>+1 415 555 0109</s0:Phone>
+                    <s0:Email>hello@margies.example</s0:Email>
+                    <s0:Address>Market Street 100</s0:Address>
+                    <s0:City>San Francisco</s0:City>
+                    <s0:Country>United States</s0:Country>
+                </s0:Company>
+                <s0:Company>
+                    <s0:Id>10</s0:Id>
+                    <s0:Name>Coho Vineyard</s0:Name>
+                    <s0:OrgNumber>556010-0010</s0:OrgNumber>
+                    <s0:Industry>Beverages</s0:Industry>
+                    <s0:Website>https://coho.example</s0:Website>
+                    <s0:Phone>+33 1 4012 4510</s0:Phone>
+                    <s0:Email>ventes@coho.example</s0:Email>
+                    <s0:Address>Rue Lafayette 17</s0:Address>
+                    <s0:City>Paris</s0:City>
+                    <s0:Country>France</s0:Country>
+                </s0:Company>
+            </tns:ListCompaniesResult>
+        </tns:ListCompaniesResponse>
+    </soap11env:Body>
+</soap11env:Envelope>
