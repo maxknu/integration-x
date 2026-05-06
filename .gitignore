@@ -32,3 +32,6 @@ Thumbs.db
 # Local working data
 tmp/
 *.log
+
+# Symphony orchestrator config (contains secrets)
+.symphony/
