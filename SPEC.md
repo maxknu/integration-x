@@ -2,7 +2,7 @@
 
 Status: Draft v1 (language-agnostic)
 
-Purpose: Define a service that orchestrates coding agents to get project work done.
+Purpose: Define a integration between our old in-house built ERP System which has SOAP API Companies to Twenty CRM Rest API Companies
 
 ## Normative Language
 
@@ -15,56 +15,25 @@ behavior.
 
 ## 1. Problem Statement
 
-Symphony is a long-running automation service that continuously reads work from an issue tracker
-(Linear in this specification version), creates an isolated workspace for each issue, and runs a
-coding agent session for that issue inside the workspace.
-
-The service solves four operational problems:
-
-- It turns issue execution into a repeatable daemon workflow instead of manual scripts.
-- It isolates agent execution in per-issue workspaces so agent commands run only inside per-issue
-  workspace directories.
-- It keeps the workflow policy in-repo (`WORKFLOW.md`) so teams version the agent prompt and runtime
-  settings with their code.
-- It provides enough observability to operate and debug multiple concurrent agent runs.
-
-Implementations are expected to document their trust and safety posture explicitly. This
-specification does not require a single approval, sandbox, or operator-confirmation policy; some
-implementations target trusted environments with a high-trust configuration, while others require
-stricter approvals or sandboxing.
+This ERP->CRM Integrartion is a integration which syncs Companies from ERP to our Twenty CRM Companies every day on schedule.
 
 Important boundary:
 
-- Symphony is a scheduler/runner and tracker reader.
-- Ticket writes (state transitions, comments, PR links) are typically performed by the coding agent
-  using tools available in the workflow/runtime environment.
-- A successful run can end at a workflow-defined handoff state (for example `Human Review`), not
-  necessarily `Done`.
+- ERPtoCRM integration only gets data from ERP SOAP endpoint
+- ERPtoCRM integration only creates new companies in Twenty CRM if they do not already exists by checking their name
 
 ## 2. Goals and Non-Goals
 
 ### 2.1 Goals
 
-- Poll the issue tracker on a fixed cadence and dispatch work with bounded concurrency.
-- Maintain a single authoritative orchestrator state for dispatch, retries, and reconciliation.
-- Create deterministic per-issue workspaces and preserve them across runs.
-- Stop active runs when issue state changes make them ineligible.
-- Recover from transient failures with exponential backoff.
-- Load runtime behavior from a repository-owned `WORKFLOW.md` contract.
-- Expose operator-visible observability (at minimum structured logs).
-- Support tracker/filesystem-driven restart recovery without requiring a persistent database; exact
-  in-memory scheduler state is not restored.
+- Each company is synced every day
+- This final code only synces the data once with given logins as input from .env files
+- 
 
 ### 2.2 Non-Goals
 
 - Rich web UI or multi-tenant control plane.
-- Prescribing a specific dashboard or terminal UI implementation.
-- General-purpose workflow engine or distributed job scheduler.
-- Built-in business logic for how to edit tickets, PRs, or comments. (That logic lives in the
-  workflow prompt and agent tooling.)
-- Mandating strong sandbox controls beyond what the coding agent and host OS provide.
-- Mandating a single default approval, sandbox, or operator-confirmation posture for all
-  implementations.
+- Orchestrator to actually schedule thse workflows, this will be done elsewhere
 
 ## 3. System Overview
 
