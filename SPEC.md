@@ -145,7 +145,7 @@ revisiting the parser.
 
 Twenty CRM `Company` object, accessed via `POST /rest/companies` and
 `GET /rest/companies?filter=...`. Authentication is a bearer token in the
-`Authorization` header. See `.codex/skills/twenty-crm/SKILL.md` for full
+`Authorization` header. See `.agents/skills/twenty-crm/SKILL.md` for full
 endpoint reference.
 
 Fields used:
@@ -370,7 +370,7 @@ integration-x/
 │   ├── company.soap.xml            # reference SOAP payload
 │   ├── twenty-crm.md               # vendored Twenty REST docs
 │   └── crm.png                     # screenshot of the Twenty workspace
-└── .codex/
+└── .agents/
     └── skills/twenty-crm/SKILL.md  # reusable Twenty REST skill
 ```
 

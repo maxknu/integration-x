@@ -25,12 +25,11 @@ authoritative description.
 
 ## Building it with a coding agent
 
-The recommended path is to let Codex (or another coding agent) implement
-Integration-X from the spec, the same way the upstream Symphony project
-recommends. The repo already includes:
+The recommended path is to let a coding agent (Claude Code, Codex, etc.)
+implement Integration-X from the spec. The repo already includes:
 
 - [`SPEC.md`](SPEC.md) — the integration spec.
-- [`.codex/skills/twenty-crm/SKILL.md`](.codex/skills/twenty-crm/SKILL.md)
+- [`.agents/skills/twenty-crm/SKILL.md`](.agents/skills/twenty-crm/SKILL.md)
   — a reusable skill describing the Twenty REST API.
 - [`docs/company.soap.xml`](docs/company.soap.xml) — a reference input
   file in the exact format the SFTP inbox produces.
@@ -38,12 +37,15 @@ recommends. The repo already includes:
 - [`docs/crm.png`](docs/crm.png) — screenshot of the target Twenty
   workspace.
 
-Open the repo in Codex and prompt:
+Open the repo in your agent of choice and prompt:
 
 > Implement Integration-X according to `SPEC.md`. Use Python 3.11+ with
 > Polars for the data normalization step. Follow the project layout in
-> §13 and the field mapping in §6. Use `.codex/skills/twenty-crm/SKILL.md`
+> §13 and the field mapping in §6. Use `.agents/skills/twenty-crm/SKILL.md`
 > for Twenty REST conventions. Do not commit any secrets.
+
+Claude Code users: `CLAUDE.md` at the repo root summarizes these
+constraints and is loaded into context automatically.
 
 ## Running it (once implemented)
 
@@ -87,13 +89,14 @@ See `SPEC.md` §13 for the full target tree. Today the repo contains:
 
 ```
 .
+├── CLAUDE.md
 ├── SPEC.md
 ├── README.md
 ├── docs/
 │   ├── company.soap.xml
 │   ├── twenty-crm.md
 │   └── crm.png
-└── .codex/
+└── .agents/
     └── skills/twenty-crm/SKILL.md
 ```
 
