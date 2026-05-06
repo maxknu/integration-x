@@ -1,41 +1,102 @@
-# Symphony
+# Integration-X
 
-Symphony turns project work into isolated, autonomous implementation runs, allowing teams to manage
-work instead of supervising coding agents.
+A one-shot Python integration that reads Customer records from an SFTP drop
+folder (SOAP XML) and upserts them as Companies in a Twenty CRM workspace.
 
-[![Symphony demo video preview](.github/media/symphony-demo-poster.jpg)](.github/media/symphony-demo.mp4)
+> [!NOTE]
+> This repo currently contains the specification only. The implementation
+> will be generated from `SPEC.md` using a coding agent.
 
-_In this [demo video](.github/media/symphony-demo.mp4), Symphony monitors a Linear board for work and spawns agents to handle the tasks. The agents complete the tasks and provide proof of work: CI status, PR review feedback, complexity analysis, and walkthrough videos. When accepted, the agents land the PR safely. Engineers do not need to supervise Codex; they can manage the work at a higher level._
+## What it does
 
-> [!WARNING]
-> Symphony is a low-key engineering preview for testing in trusted environments.
+1. Connects to an SFTP server and lists `*.xml` files in a configured inbox.
+2. Parses each file as a SOAP `ListCompaniesResponse` envelope (see
+   `docs/company.soap.xml` for the reference shape).
+3. Standardizes the rows in a Polars DataFrame (trim, normalize, in-batch
+   dedup by `name`).
+4. For each row, looks up an existing Twenty Company by exact `name`. If
+   none exists, creates one with `name`, `domainName`, and `address`.
+5. Moves successfully processed files to `<inbox>/processed/`.
+6. Writes a per-run log to `<inbox>/log/<UTC ISO8601>.log`.
 
-## Running Symphony
+The CLI runs once and exits. Scheduling is handled by an external job
+runner (cron, systemd timer, etc.). See [`SPEC.md`](SPEC.md) for the
+authoritative description.
 
-### Requirements
+## Building it with a coding agent
 
-Symphony works best in codebases that have adopted
-[harness engineering](https://openai.com/index/harness-engineering/). Symphony is the next step --
-moving from managing coding agents to managing work that needs to get done.
+The recommended path is to let Codex (or another coding agent) implement
+Integration-X from the spec, the same way the upstream Symphony project
+recommends. The repo already includes:
 
-### Option 1. Make your own
+- [`SPEC.md`](SPEC.md) — the integration spec.
+- [`.codex/skills/twenty-crm/SKILL.md`](.codex/skills/twenty-crm/SKILL.md)
+  — a reusable skill describing the Twenty REST API.
+- [`docs/company.soap.xml`](docs/company.soap.xml) — a reference input
+  file in the exact format the SFTP inbox produces.
+- [`docs/twenty-crm.md`](docs/twenty-crm.md) — vendored Twenty API docs.
+- [`docs/crm.png`](docs/crm.png) — screenshot of the target Twenty
+  workspace.
 
-Tell your favorite coding agent to build Symphony in a programming language of your choice:
+Open the repo in Codex and prompt:
 
-> Implement Symphony according to the following spec:
-> https://github.com/openai/symphony/blob/main/SPEC.md
+> Implement Integration-X according to `SPEC.md`. Use Python 3.11+ with
+> Polars for the data normalization step. Follow the project layout in
+> §13 and the field mapping in §6. Use `.codex/skills/twenty-crm/SKILL.md`
+> for Twenty REST conventions. Do not commit any secrets.
 
-### Option 2. Use our experimental reference implementation
+## Running it (once implemented)
 
-Check out [elixir/README.md](elixir/README.md) for instructions on how to set up your environment
-and run the Elixir-based Symphony implementation. You can also ask your favorite coding agent to
-help with the setup:
+```bash
+python -m integration_x
+```
 
-> Set up Symphony for my repository based on
-> https://github.com/openai/symphony/blob/main/elixir/README.md
+The CLI takes no required arguments. All configuration comes from
+environment variables (full list in `SPEC.md` §12).
 
----
+Required:
+
+| Variable           | Example                  |
+|--------------------|--------------------------|
+| `SFTP_HOST`        | `192.168.1.98`           |
+| `SFTP_PORT`        | `2022`                   |
+| `SFTP_USERNAME`    | `viipipe`                |
+| `SFTP_PASSWORD`    | (secret)                 |
+| `SFTP_INBOX`       | `ERPOut`                 |
+| `TWENTY_BASE_URL`  | `https://crm.mspixel.se` |
+| `TWENTY_API_TOKEN` | (secret)                 |
+
+Optional:
+
+| Variable                        | Default | Notes                          |
+|---------------------------------|---------|--------------------------------|
+| `INTEGRATION_X_TIMEOUT_SECONDS` | `30`    | Per-HTTP-request timeout.      |
+| `INTEGRATION_X_LOG_LEVEL`       | `INFO`  | `INFO` or `DEBUG`.             |
+
+A `.env` file may be used during development. Make sure it is in
+`.gitignore` and never committed.
+
+Exit codes:
+
+- `0` — every file processed (per-row skips are allowed and logged).
+- `1` — at least one file-level failure (parse, archive, or log upload).
+
+## Project layout
+
+See `SPEC.md` §13 for the full target tree. Today the repo contains:
+
+```
+.
+├── SPEC.md
+├── README.md
+├── docs/
+│   ├── company.soap.xml
+│   ├── twenty-crm.md
+│   └── crm.png
+└── .codex/
+    └── skills/twenty-crm/SKILL.md
+```
 
 ## License
 
-This project is licensed under the [Apache License 2.0](LICENSE).
+Apache License 2.0 — see [`LICENSE`](LICENSE).
